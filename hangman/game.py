@@ -56,7 +56,8 @@ class GuessWord(object):
 class HangmanGame(object):
     WORD_LIST = ['rmotr', 'python', 'awesome']
     
-    def select_random_word(words):
+    @classmethod
+    def select_random_word(cls, words):
         if len(words) < 1:
             raise InvalidListOfWordsException()
         return random.choice(words)
@@ -69,7 +70,7 @@ class HangmanGame(object):
         self.number_of_guesses = number_of_guesses
         self.remaining_misses = number_of_guesses
         self.previous_guesses = []
-        self.word = GuessWord(self.list_of_words[0])
+        self.word = GuessWord(HangmanGame.select_random_word(self.list_of_words))
         self.game_won = None
         self.finished = False
         
